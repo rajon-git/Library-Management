@@ -1,0 +1,73 @@
+
+{% extends "base.html" %} {% block content %}
+<div class="bg-light">
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-center justify-content-center mt-4 mt-md-0">
+      <h3 class="text-justify">
+        “Your most unhappy customers are your most important source of learning.” – Bill Gates, Microsoft Founder
+      </h3>
+    </div>
+    <div class="col-md-6">
+      <section>
+        {% if request.GET.command == 'verification' %}
+        <div
+          class="container mx-auto alert alert-info text-center"
+          role="alert"
+          style="max-width: 1024px;"
+        >
+          Thank you for registering with us. We have sent you an verification email to
+          your email address [{{ request.GET.email }}].
+          <br /><br />
+          Already Verified?<a href="{% url 'login' %}">Login</a>
+        </div>
+        {% else %}
+        <div class="card mx-auto" style="max-width: 380px; margin-top: 30px;">
+          <div class="card-body login_background">
+            <h4 class="card-title mb-4">Sign in</h4>
+
+
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Address"
+                  name="email"
+                />
+              </div>
+              <div class="form-group mt-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  name="password"
+                />
+              </div>
+
+              <div class="form-group mt-2">
+                <a href="#" class="float-right" style="text-decoration:none;"
+                  >Forgot password?</a
+                >
+              </div>
+              <!-- form-group form-check .// -->
+              <div class="form-group mt-1">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </div>
+              <!-- form-group// -->
+            </form>
+          </div>
+        </div>
+
+        <p class="text-center mt-4">
+          Don't have account? <a href="{% url 'register' %}" style="text-decoration:none;">Sign up</a>
+        </p>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+<div class="bg-light pt-5">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-center justify-content-center mt-3 mt-md-0">
+      <img src={% static '/images/register.png' %} alt="Register image" width="200px"/>
+      
+    </div>
+    <div class="col-md-6">
+      <section class="bg-light">
+        <div class="container">
+        <div class="card mx-auto" style="max-width: 520px; margin-top: 10px">
+          <article class="card-body register_background">
+           
+            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+            <form action="{% url 'register' %}" method="POST">
+              {% csrf_token %}
+      
+              <div class="form-row d-flex justify-content-between">
+                <div class="col form-group">
+                  <label>First name</label>
+                  {{form.first_name}}
+                </div>
+                <div class="col form-group mx-3">
+                  <label>Last name</label>
+                  {{form.last_name}}
+                </div>
+                
+              </div>
+              
+      
+              <div class="form-row d-flex justify-content-between mt-2">
+                <div class="form-group col ">
+                  <label>Email Address</label>
+                  {{ form.email }}
+                </div>
+               
+                <div class="form-group col mx-3 ">
+                  <label>Phone Number</label>
+                  {{ form.phone_number }}
+                </div>
+                
+              </div>
+              
+              <div class="form-row d-flex justify-content-between mt-2">
+                <div class="form-group col">
+                  <label>Create password</label>
+                  {{form.password}}
+                </div>
+                <!-- form-group end.// -->
+                <div class="form-group col mx-3">
+                  <label>Repeat password</label>
+                  {{form.confirm_password}}
+                </div>
+                <!-- form-group end.// -->
+              </div>
+              <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Register
+                </button>
+              </div>
+              <!-- form-group// -->
+      
+              {{ form.email.errors }} {{ form.non_field_errors}}
+            </form>
+          </article>
+          <!-- card-body.// -->
+        </div>
+      </div>
+        
+        <p class="text-center mt-4">
+          Have an account? <a href="#" style="text-decoration:none;">Log In</a>
+        </p>
+        <br /><br />
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
