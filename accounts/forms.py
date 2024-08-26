@@ -1,4 +1,4 @@
-from typing import Any
+
 from django import forms
 from .models import Account
 
@@ -42,4 +42,7 @@ class UserForm(forms.ModelForm):
         super(UserForm,self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class']= 'form-control'
+
+class AddAmountForm(forms.Form):
+    amount = forms.FloatField()
 

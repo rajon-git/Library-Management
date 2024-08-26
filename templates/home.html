@@ -7,7 +7,9 @@
         <div class="card card-custom">
           <img src="{{book.images.url}}" class="card-img-top" alt="Card image">
           <div class="card-body">
-            <h5 class="card-title">{{ book.title }}</h5>
+            <a href="{% url 'book_details' book.id %}" class="text-decoration-none">
+                <h5 class="card-title">{{ book.title }}</h5>
+            </a>
             <p class="card-text mb-0">Author: {{ book.author }}</p>
             <div class="d-flex flex-wrap justify-content-between mb-0">
                 <p class="card-text">Category: {{ book.category.cat_Title }}</p>

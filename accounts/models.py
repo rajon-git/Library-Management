@@ -18,7 +18,6 @@ class MyAccountManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        user.is_active = True
         return user 
     def create_superuser(self, first_name, last_name, email, username,password):
         user = self.create_user(
@@ -36,7 +35,6 @@ class MyAccountManager(BaseUserManager):
         user.save(using = self._db)
         return user
 
-
 # Create your models here.
 class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
@@ -44,7 +42,7 @@ class Account(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=50, unique=True)
     phone_number = models.CharField(max_length=11)
-    coupon_applied_amount = models.FloatField(blank=True,null=True)
+    amount = models.FloatField(default=0, blank=True,null=True)
 
     #required
     date_join = models.DateTimeField(auto_now_add=True)
@@ -65,8 +63,5 @@ class Account(AbstractBaseUser):
     def __str__(self):
         return self.email
     
-    def has_perm(self,perm,obj=None):
-        return self.is_admin
-    
-    def has_module_perms(self,add_label):
-        return True
+
+

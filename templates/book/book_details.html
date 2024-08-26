@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <img src="{{book_detail.images.url}}" alt="Product Image" class="img-fluid product-image">
+        </div>
+        <!-- Product Details -->
+        <div class="col-md-6 product-info">
+            <h2 class="display-4">{{book_detail.title}}</h2>
+            <p class="lead">Author: {{book_detail.author}}</p>
+            <p class="text-muted">Category: {{book_detail.category.cat_Title}}</p>
+            <p class="text-muted">Price: {{book_detail.borrow_price}} BDT</p>
+            <p class="lead">{{book_detail.description}}</p>
+            <div class="d-flex align-items-center mt-3">
+                <button class="btn btn-primary btn-lg me-3">Borrow</button>
+                <button class="btn btn-outline-secondary btn-lg">Wishlist</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

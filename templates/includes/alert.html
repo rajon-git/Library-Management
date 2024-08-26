@@ -1,0 +1,45 @@
+{% if messages %}
+    <div style="margin-top: 20px;">
+        {% for message in messages %}
+            <div id="message-{{ forloop.counter }}"
+                 style="
+                     position: relative;
+                     padding: 15px;
+                     margin-bottom: 15px;
+                     border: 1px solid transparent;
+                     border-radius: 4px;
+                     color: {% if message.tags == 'success' %}#155724{% elif message.tags == 'error' %}#721c24{% else %}#000{% endif %};
+                     background-color: {% if message.tags == 'success' %}#d4edda{% elif message.tags == 'error' %}#f8d7da{% else %}#e2e3e5{% endif %};
+                     border-color: {% if message.tags == 'success' %}#c3e6cb{% elif message.tags == 'error' %}#f5c6cb{% else %}#d6d8db{% endif %};
+                 "
+                 role="alert">
+                {{ message }}
+                <button type="button"
+                        style="
+                            position: absolute;
+                            top: 10px;
+                            right: 10px;
+                            border: none;
+                            background: transparent;
+                            font-size: 1.25rem;
+                            line-height: 1;
+                            color: inherit;
+                            cursor: pointer;
+                        "
+                        aria-label="Close"
+                        onclick="this.parentElement.style.display='none';">
+                    &times;
+                </button>
+            </div>
+            <script>
+                // Set a timer to automatically hide the message after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    var messageElement = document.getElementById('message-{{ forloop.counter }}');
+                    if (messageElement) {
+                        messageElement.style.display = 'none';
+                    }
+                }, 4000); // Change 5000 to the desired time in milliseconds
+            </script>
+        {% endfor %}
+    </div>
+{% endif %}

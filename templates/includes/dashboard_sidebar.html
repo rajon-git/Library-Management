@@ -1,0 +1,20 @@
+<aside class="col-md-3">
+    <!--   SIDEBAR   -->
+    <ul class="list-group order_sidebar">
+      <a
+        class="side-container-place-order list-group-item {% if '/accounts/' == request.path %} active {% endif %}"
+        href="{% url 'dashobard' %}"
+        style="text-decoration: none"
+      >
+        Dashboard
+      </a>
+      
+      
+    </ul>
+    
+    <a class="btn btn-secondary btn-block order_sidebar mt-1 mb-2" href="{% url 'logout' %}" style="text-decoration: none">
+      <i class="fa fa-power-off"></i> <span class="text">Log out</span>
+    </a>
+    <!--   SIDEBAR .//END   -->
+  </aside>
+  
