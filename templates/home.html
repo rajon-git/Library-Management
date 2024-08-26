@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+      {% for book in books %}
+      <div class="col-md-3 mb-4">
+        <div class="card card-custom">
+          <img src="{{book.images.url}}" class="card-img-top" alt="Card image">
+          <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text mb-0">Author: {{ book.author }}</p>
+            <div class="d-flex flex-wrap justify-content-between mb-0">
+                <p class="card-text">Category: {{ book.category.cat_Title }}</p>
+            <p class="card-text">{{ book.borrow_price }} BDT</p>
+            </div>
+            <a href="{{ book.url }}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+    
+
+{% endblock %}
