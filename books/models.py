@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Account
 
 # Create your models here.
 class BookCategory(models.Model):
@@ -20,3 +21,14 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+    
+class BorrowBook(models.Model):
+    user = models.ForeignKey(Account, on_delete= models.CASCADE)
+    books = models.ManyToManyField(Book)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def total_books(self):
+        return self.books.count()
+
+    def __str__(self):
+        return f"{self.user.first_name}'s Borrow"

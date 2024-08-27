@@ -8,7 +8,14 @@
       >
         Dashboard
       </a>
-      
+
+      <a
+        class="side-container-place-order list-group-item {% if '/accounts/' == request.path %} active {% endif %}"
+        href="{% url 'borrow_books' %}"
+        style="text-decoration: none"
+      >
+        Borrowed Books
+      </a>
       
     </ul>
     
