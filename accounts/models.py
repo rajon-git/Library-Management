@@ -43,6 +43,8 @@ class Account(AbstractBaseUser):
     email = models.EmailField(max_length=50, unique=True)
     phone_number = models.CharField(max_length=11)
     amount = models.FloatField(default=0, blank=True,null=True)
+    request_amount = models.FloatField(default=0, blank=True,null=True)
+    accept_request = models.BooleanField(default=False)
 
     #required
     date_join = models.DateTimeField(auto_now_add=True)
@@ -62,6 +64,14 @@ class Account(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+    
+    def save(self, *args, **kwargs):
+        if self.accept_request and self.request_amount > 0:
+            self.amount += self.request_amount
+            self.request_amount = 0
+            self.accept_request = False
+
+        super(Account, self).save(*args, **kwargs)
     
 
 

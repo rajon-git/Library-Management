@@ -55,27 +55,58 @@ def dashobard(request):
     
     return render(request, 'author/dashboard.html')
 
+# @login_required
+# def add_amount(request):
+#     if request.method == 'POST':
+#         amount = request.POST.get('amount')
+#         if amount:
+#             try:
+#                 amount = float(amount)
+#                 user = request.user
+                
+#                 # Initialize user.amount if it's None
+#                 if user.amount is None:
+#                     user.amount = 0
+                
+#                 user.amount += amount
+#                 user.save()
+#                 messages.success(request, f'Amount of {amount} added successfully!')
+#             except ValueError:
+#                 messages.error(request, 'Invalid amount entered.')
+#             except Exception as e:
+#                 messages.error(request, f'An error occurred: {str(e)}')
+#         else:
+#             messages.error(request, 'Amount cannot be empty.')
+#         return redirect('dashobard')
+#     return redirect('dashobard')
+
 @login_required
 def add_amount(request):
     if request.method == 'POST':
-        amount = request.POST.get('amount')
-        if amount:
-            try:
-                amount = float(amount)
-                user = request.user
-                
-                # Initialize user.amount if it's None
-                if user.amount is None:
-                    user.amount = 0
-                
-                user.amount += amount
-                user.save()
-                messages.success(request, f'Amount of {amount} added successfully!')
-            except ValueError:
-                messages.error(request, 'Invalid amount entered.')
-            except Exception as e:
-                messages.error(request, f'An error occurred: {str(e)}')
-        else:
+        amount_str = request.POST.get('amount')
+        
+        if not amount_str:
             messages.error(request, 'Amount cannot be empty.')
+            return redirect('dashobard')
+        
+        try:
+            amount = float(amount_str)
+            if amount <= 0:
+                raise ValueError("Amount must be positive.")
+            
+            user = request.user
+            if user.request_amount is None:
+                user.request_amount = 0
+            
+            user.request_amount += amount
+            user.accept_request = False
+            user.save()
+            messages.success(request, f'Request to Add {amount} sent successfully!')
+        except ValueError as ve:
+            messages.error(request, f'Invalid amount entered: {ve}')
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
+        
         return redirect('dashobard')
+    
     return redirect('dashobard')
