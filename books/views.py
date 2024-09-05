@@ -7,12 +7,19 @@ from django.contrib.auth.decorators import login_required
 def books(request):
     query = request.GET.get('q', '')
     category_filter = request.GET.get('category', '')
+    max_price_filter = request.GET.get('price_max', '')
+    min_price_filter = request.GET.get('price_min', '')
     books = Book.objects.all()
 
     if query:
         books = books.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
     if category_filter:
         books = books.filter(category_id=category_filter)
+
+    if min_price_filter:
+        books=books.filter(borrow_price__gte=min_price_filter)
+    if max_price_filter:
+        books=books.filter(borrow_price__lte=max_price_filter)
     
     category = BookCategory.objects.all()
 
