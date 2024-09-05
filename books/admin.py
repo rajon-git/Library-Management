@@ -10,3 +10,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(models.BookCategory, CategoryAdmin)
 admin.site.register(models.Book)
 admin.site.register(models.BorrowBook)
+admin.site.register(models.Review)

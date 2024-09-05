@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password =None):
@@ -68,10 +71,26 @@ class Account(AbstractBaseUser):
     def save(self, *args, **kwargs):
         if self.accept_request and self.request_amount > 0:
             self.amount += self.request_amount
+            
+          
+            mail_subject = 'Request Accepted'
+            message = render_to_string('email_template.html', {
+                'user': self,
+                'request_amount': self.request_amount,
+            })
+            to_email = self.email
+
+            send_email = EmailMessage(mail_subject, message, from_email=settings.EMAIL_HOST_USER, to=[to_email])
+            send_email.content_subtype = 'html'  
+            send_email.send()
             self.request_amount = 0
             self.accept_request = False
 
         super(Account, self).save(*args, **kwargs)
+
+        
+       
+
     
 
 
