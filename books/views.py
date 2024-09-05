@@ -6,11 +6,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def books(request):
     query = request.GET.get('q', '')
+    category_filter = request.GET.get('category', '')
+    books = Book.objects.all()
 
     if query:
-        books = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
-    else:
-        books = Book.objects.all()
+        books = books.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+    if category_filter:
+        books = books.filter(category_id=category_filter)
+    
     category = BookCategory.objects.all()
 
     context = {

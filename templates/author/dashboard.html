@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<section class="mt-3">
+<section class="mt-5 mb-5">
   <div class="container">
     <div class="row">
       {% include 'includes/dashboard_sidebar.html'%}
@@ -42,23 +42,7 @@
                   style="text-align: center"
                 >
                   <div class="card-body">
-                    {% if user_profile.profile_picture %}
-                    <img
-                      src="{{ user_profile.profile_picture.url }}"
-                      alt="User Profile Picture"
-                      width="50"
-                      height="50"
-                      style="border-radius: 50%"
-                    />
-                    {% else %}
-                    <img
-                      src="{% static 'profile.png' %}"
-                      alt="User Profile Picture"
-                      width="50"
-                      height="50"
-                      style="border-radius: 50%"
-                    />
-                    {% endif %}
+                    
                     <p class="mb-0">{{user.email}}</p>
                     <p>{{user.phone_number}}</p>
                   </div>

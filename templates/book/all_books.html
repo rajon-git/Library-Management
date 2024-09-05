@@ -2,26 +2,25 @@
 {% load static %}
 {% block content %}
 
-<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success p-3">
     <a class="navbar-brand" href="#">BookStore</a>
 </nav>
 
-<!-- Main Content -->
 <div class="container-xxl">
     <div class="row mt-3 mx-2">
-        <!-- Filter Sidebar -->
+       
         <div class="col-lg-2 col-md-3 filter-sidebar bg-success p-3" style="border-radius: 10px;">
             <div class="filter-item">
                 <h5 class="text-white">Category</h5>
                 <ul class="list-unstyled">
+                    <li><a href="{% url 'books' %}" class="text-decoration-none text-dark"><b>All Categories</b></a></li>
                     {% for cat in category %}
-                    <li><a href="#" class="text-decoration-none text-dark"><b>{{cat.cat_Title}}</b></a></li>
+                    <li><a href="{% url 'books' %}?category={{cat.id}}" class="text-decoration-none text-dark"><b>{{cat.cat_Title}}</b></a></li>
                     {% endfor %}
                 </ul>
             </div>
             <hr/>
-            <!-- Price Filter -->
+          
             <div class="filter-item">
                 <h5 class="text-white">Price Range</h5>
                 <form>
@@ -37,7 +36,7 @@
                 </form>
             </div>
         </div>
-        <!-- Book Grid -->
+      
         <div class="col-lg-10 col-md-9">
             <div class="row">
                 {% for book in books %}
