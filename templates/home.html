@@ -1,5 +1,9 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-
+<div class="mt-0">
+        <div class="photo-frame">
+          <img src="{% static 'book.jpg' %}" alt="Sample Photo" >
+  </div>
+</div>
 <div class="container mt-5">
     <div class="row">
       {% for book in books %}

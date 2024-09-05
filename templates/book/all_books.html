@@ -3,28 +3,27 @@
 {% block content %}
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success p-3">
     <a class="navbar-brand" href="#">BookStore</a>
 </nav>
 
 <!-- Main Content -->
 <div class="container-xxl">
-    <div class="row mt-3">
+    <div class="row mt-3 mx-2">
         <!-- Filter Sidebar -->
-        <div class="col-lg-2 col-md-3 filter-sidebar">
-            <h4 class="filter-title">Filter By</h4>
-            <!-- Category Filter -->
+        <div class="col-lg-2 col-md-3 filter-sidebar bg-success p-3" style="border-radius: 10px;">
             <div class="filter-item">
-                <h5>Category</h5>
+                <h5 class="text-white">Category</h5>
                 <ul class="list-unstyled">
                     {% for cat in category %}
-                    <li><a href="#" class="text-decoration-none">{{cat.cat_Title}}</a></li>
+                    <li><a href="#" class="text-decoration-none text-dark"><b>{{cat.cat_Title}}</b></a></li>
                     {% endfor %}
                 </ul>
             </div>
+            <hr/>
             <!-- Price Filter -->
             <div class="filter-item">
-                <h5>Price Range</h5>
+                <h5 class="text-white">Price Range</h5>
                 <form>
                     <div class="mb-3">
                         <label for="priceMin" class="form-label">Min Price</label>
@@ -34,7 +33,7 @@
                         <label for="priceMax" class="form-label">Max Price</label>
                         <input type="number" class="form-control" id="priceMax" placeholder="1000">
                     </div>
-                    <button type="submit" class="btn btn-primary">Apply</button>
+                    <button type="submit" class="btn btn-primary bg-dark">Apply</button>
                 </form>
             </div>
         </div>

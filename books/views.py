@@ -5,7 +5,12 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def books(request):
-    books = Book.objects.all()
+    query = request.GET.get('q', '')
+
+    if query:
+        books = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+    else:
+        books = Book.objects.all()
     category = BookCategory.objects.all()
 
     context = {
