@@ -4,6 +4,7 @@ from .models import Account
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from .forms import AddAmountForm
+from books.models import BorrowBook
 
 # Create your views here.
 def register(request):
@@ -52,33 +53,7 @@ def user_logout(request):
     return redirect('login')
 
 def dashobard(request):
-    
     return render(request, 'author/dashboard.html')
-
-# @login_required
-# def add_amount(request):
-#     if request.method == 'POST':
-#         amount = request.POST.get('amount')
-#         if amount:
-#             try:
-#                 amount = float(amount)
-#                 user = request.user
-                
-#                 # Initialize user.amount if it's None
-#                 if user.amount is None:
-#                     user.amount = 0
-                
-#                 user.amount += amount
-#                 user.save()
-#                 messages.success(request, f'Amount of {amount} added successfully!')
-#             except ValueError:
-#                 messages.error(request, 'Invalid amount entered.')
-#             except Exception as e:
-#                 messages.error(request, f'An error occurred: {str(e)}')
-#         else:
-#             messages.error(request, 'Amount cannot be empty.')
-#         return redirect('dashobard')
-#     return redirect('dashobard')
 
 @login_required
 def add_amount(request):
@@ -106,7 +81,7 @@ def add_amount(request):
             messages.error(request, f'Invalid amount entered: {ve}')
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')
-        
         return redirect('dashobard')
-    
     return redirect('dashobard')
+
+

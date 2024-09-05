@@ -14,19 +14,27 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">SL No.</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Borrow Price</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                  {% for record in borrowed_books %}
+                      {% for book in record.books.all %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ book.title }}</td>
+                            <td>{{book.category.cat_Title}}</td>
+                            <td>{{book.borrow_price}} BDT</td>
+                            <td>{{record.created_at}}</td>
+                            <td><a href="{% url 'return_books' book.id %}" class="btn btn-danger">Return</a></td>
+                          </tr>
+                      {% endfor %}
+                  {% endfor %}
                 </tbody>
               </table>
           </article>

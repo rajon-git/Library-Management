@@ -14,7 +14,9 @@
             <p class="text-muted">Category: {{book_detail.category.cat_Title}}</p>
             <p class="text-muted">Price: {{book_detail.borrow_price}} BDT</p>
             <p class="lead">{{book_detail.description}}</p>
+            <p>{% include 'includes/alert.html' %}</p>
             <div class="d-flex align-items-center mt-3">
+                
                 <a href="{% url 'book_borrow' book_detail.id %}" class="btn btn-primary btn-lg me-3">Borrow</a>
             </div>
         </div>
