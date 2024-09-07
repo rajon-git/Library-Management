@@ -1,12 +1,47 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<div class="mt-0">
-        <div class="photo-frame">
-          <img src="{% static 'book.jpg' %}" alt="Sample Photo" >
+<div class="container-xxl mt-2">
+  <div class="row">
+    <div class="col-md-4 d-flex justify-content-center align-items-center bg-light  mb-3 mb-md-0 ">
+      <h2 class="text-success p-2" style="text-align: justify;">
+        “Libraries are the envy of all other institutions. They are places where ideas can grow and flourish, where people can learn and be inspired.”
+      </h2>
+    </div>
+    <div class="col-md-8">
+      <div class="photo-frame">
+        <img src="{% static 'book.jpg' %}" alt="Sample Photo" class="img-fluid">
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="container mt-5">
     <div class="row">
+      <h2 class="text-center mb-3 text-success">New Arraivals</h2>
       {% for book in books %}
+      <div class="col-md-3 mb-4">
+        <div class="card card-custom">
+          <img src="{{book.images.url}}" class="card-img-top" alt="Card image">
+          <div class="card-body">
+            <a href="{% url 'book_details' book.id %}" class="text-decoration-none">
+                <h5 class="card-title">{{ book.title }}</h5>
+            </a>
+            <p class="card-text mb-0">Author: {{ book.author }}</p>
+            <div class="d-flex flex-wrap justify-content-between mb-0">
+                <p class="card-text">Category: {{ book.category.cat_Title }}</p>
+            <p class="card-text">{{ book.borrow_price }} BDT</p>
+            </div>
+            <a href="{% url 'book_details' book.id %}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <h2 class="text-center mb-3 text-success">Featured Books</h2>
+      {% for book in featured_books %}
       <div class="col-md-3 mb-4">
         <div class="card card-custom">
           <img src="{{book.images.url}}" class="card-img-top" alt="Card image">

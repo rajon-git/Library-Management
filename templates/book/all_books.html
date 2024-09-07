@@ -2,16 +2,16 @@
 {% load static %}
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success p-3">
-    <a class="navbar-brand" href="#">BookStore</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-light p-3">
+    <a class="navbar-brand text-success" href="#"><b>BookStore</b></a>
 </nav>
 
 <div class="container-xxl">
     <div class="row mt-3 mx-2">
        
-        <div class="col-lg-2 col-md-3 filter-sidebar bg-success p-3" style="border-radius: 10px;">
+        <div class="col-lg-2 col-md-3 filter-sidebar bg-light p-3" style="border-radius: 10px;">
             <div class="filter-item">
-                <h5 class="text-white">Category</h5>
+                <h5 class="text-success">Category</h5>
                 <ul class="list-unstyled">
                     <li><a href="{% url 'books' %}" class="text-decoration-none text-dark"><b>All Categories</b></a></li>
                     {% for cat in category %}
@@ -32,7 +32,7 @@
                         <label for="priceMax" class="form-label">Max Price</label>
                         <input type="number" class="form-control" name="price_max" value="{{request.GET.price_max}}" id="priceMax" placeholder="1000">
                     </div>
-                    <button type="submit" class="btn btn-primary bg-dark">Apply</button>
+                    <button type="submit" class="btn btn-primary bg-success">Apply</button>
                 </form>
             </div>
         </div>

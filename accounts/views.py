@@ -30,13 +30,11 @@ def register(request):
     }
     return render(request, 'author/register.html',context)
 
-
 def user_login(request):
     if request.method == 'POST':
         email= request.POST['email']
         password = request.POST['password']
         user = auth.authenticate(email=email, password=password)
-        print(user)
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are logged in.')
@@ -63,7 +61,6 @@ def add_amount(request):
         if not amount_str:
             messages.error(request, 'Amount cannot be empty.')
             return redirect('dashobard')
-        
         try:
             amount = float(amount_str)
             if amount <= 0:
@@ -72,7 +69,6 @@ def add_amount(request):
             user = request.user
             if user.request_amount is None:
                 user.request_amount = 0
-            
             user.request_amount += amount
             user.accept_request = False
             user.save()
@@ -83,5 +79,31 @@ def add_amount(request):
             messages.error(request, f'An error occurred: {str(e)}')
         return redirect('dashobard')
     return redirect('dashobard')
+
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Password updated successfully')
+                return redirect('change_password')
+            else:
+                messages.error(request, 'Please enter valid current password')
+                return redirect('change_password')
+        else:
+            messages.error(request,'Password does not match!')
+            return redirect('change_password')
+    return render(request, 'author/change_password.html')
+
+
 
 

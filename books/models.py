@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Account
+from django.utils import timezone
 
 # Create your models here.
 class BookCategory(models.Model):
@@ -17,6 +18,7 @@ class Book(models.Model):
     images = models.ImageField(upload_to='photos/books')
     category = models.ForeignKey(BookCategory, on_delete=models.CASCADE)
     borrow_price = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
